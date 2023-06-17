@@ -1,0 +1,8 @@
+# Shoppy.gg Order Spammer Bot Config #
+
+# Discord bot token
+discord_token: "YOUR TOKEN HERE"
+# Discord bot prefix
+bot_prefix: "."
+# Discord logs channel id
+logs_channel: 0123456789
