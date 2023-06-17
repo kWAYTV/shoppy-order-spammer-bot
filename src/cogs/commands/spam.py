@@ -21,8 +21,7 @@ class Spam(commands.Cog):
     async def spam_command(self, interaction: discord.Interaction, amount: int, product_id: str):
         await interaction.response.defer(ephemeral=True)
 
-        dirty_user = f"{interaction.user.name}#{interaction.user.discriminator}"
-        username = await self.utils.clean_discord_username(dirty_user)
+        username = await self.utils.clean_discord_username(f"{interaction.user.name}#{interaction.user.discriminator}")
 
         if amount > 50:
             return await interaction.followup.send("❌ You can't spam more than 50 times at once!", ephemeral=True)
