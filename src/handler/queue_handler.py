@@ -34,7 +34,7 @@ class QueueHandler:
                 payment_method = order['payment_method']
                 requested_by = order['requested_by']
 
-                self.logger.log("INFO", f"Processing order from user {requested_by} for amout of {amount} to product: {product_id}.")
+                self.logger.log("INFO", f"Processing order from user {requested_by} for amount of {amount} to product: {product_id}.")
 
                 # Use asyncio's run_in_executor to run blocking functions in a thread
                 with ThreadPoolExecutor() as executor:
