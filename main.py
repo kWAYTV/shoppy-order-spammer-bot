@@ -21,22 +21,29 @@ class Bot(commands.Bot):
     async def setup_hook(self) -> None:
         self.logger.clear()
         self.logger.log("INFO", f"Starting bot...")
+
         self.file_manager.check_input()
         self.logger.clear()
+
         self.logger.log("INFO", "Loading cogs...")
         for filename in os.listdir("./src/cogs/commands"):
             if filename.endswith(".py") and not filename.startswith("_"):
                 await self.load_extension(f"src.cogs.commands.{filename[:-3]}")
         self.logger.clear()
+
         self.logger.log("INFO", "Loading events...")
         for filename in os.listdir("./src/cogs/events"):
             if filename.endswith(".py") and not filename.startswith("_"):
                 await self.load_extension(f"src.cogs.events.{filename[:-3]}")
         self.logger.clear()
+
         self.logger.log("INFO", "Loading loops...")
         for filename in os.listdir("./src/cogs/loops"):
             if filename.endswith(".py") and not filename.startswith("_"):
                 await self.load_extension(f"src.cogs.loops.{filename[:-3]}")
+        self.logger.clear()
+
+        self.logger.log("INFO", f"Setup completed!")
         self.logger.clear()
 
 # Define the clients
