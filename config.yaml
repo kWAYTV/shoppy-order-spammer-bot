@@ -5,10 +5,12 @@ discord_token: ""
 # Discord bot prefix
 bot_prefix: "."
 # Discord logs channel id
-logs_channel:
+logs_channel: 0123456789
 # Loading green emoji id
 loading_green_emoji_id: ""
 # Loading red emoji id
 loading_red_emoji_id: ""
 # Green tick emoji id
 green_tick_emoji_id: ""
+# User timeout (seconds)
+user_timeout:

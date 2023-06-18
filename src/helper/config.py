@@ -12,3 +12,4 @@ class Config():
             self.loading_green_emoji_id = self.config["loading_green_emoji_id"]
             self.loading_red_emoji_id = self.config["loading_red_emoji_id"]
             self.green_tick_emoji_id = self.config["green_tick_emoji_id"]
+            self.user_timeout = int(self.config["user_timeout"])

@@ -33,7 +33,7 @@ class Spam(commands.Cog):
             minutes, seconds = divmod(time_remaining, 60)
             await self.logger.discord_log(f"⏳ @{username} tried to use the spam command but is in timeout for {int(minutes)} minutes and {int(seconds)} seconds.")
             self.logger.log("INFO", f"⏳ @{username} tried to use the spam command but is in timeout for {int(minutes)} minutes and {int(seconds)} seconds.")
-            return await interaction.followup.send(f"{self.config.loading_red_emoji_id} You can only use this command every 30 minutes! Please wait {int(minutes)} minutes and {int(seconds)} seconds.", ephemeral=True)
+            return await interaction.followup.send(f"{self.config.loading_red_emoji_id} You can only use this command every {self.config.user_timeout} minutes! Please wait {int(minutes)} minutes and {int(seconds)} seconds.", ephemeral=True)
 
         # Check if the amount is more than 50
         if amount > 50:
@@ -60,8 +60,8 @@ class Spam(commands.Cog):
 
         # Add user to timeout list after they have successfully used the command
         self.timeout_manager.add_user(interaction.user.id)
-        self.logger.discord_log(f"⏳ @{username} has been added to the timeout list for 30 minutes.")
-        self.logger.log("INFO", f"⏳ @{username} has been added to the timeout list for 30 minutes.")
+        self.logger.discord_log(f"⏳ @{username} has been added to the timeout list for {self.config.user_timeout} minutes.")
+        self.logger.log("INFO", f"⏳ @{username} has been added to the timeout list for {self.config.user_timeout} minutes.")
 
     @spam_command.error
     async def spam_command_error(self, interaction: discord.Interaction, error: app_commands.AppCommandError):

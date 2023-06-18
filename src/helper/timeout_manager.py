@@ -1,8 +1,9 @@
-import time
-import sqlite3
+import time, sqlite3
+from src.helper.config import Config
 
 class TimeoutManager:
     def __init__(self):
+        self.config = Config()
         self.connection = sqlite3.connect('timeout_db.sqlite')
         self.create_table()
 
@@ -37,8 +38,8 @@ class TimeoutManager:
             return False, None
 
         elapsed_time = time.time() - user[1]  # Access the second element of the tuple
-        if elapsed_time < 1800:
-            return True, 1800 - elapsed_time
+        if elapsed_time < self.config.user_timeout:
+            return True, self.config.user_timeout - elapsed_time
         else:
             self.remove_user(user_id)
             return False, None

@@ -17,6 +17,8 @@ loading_green_emoji_id: ""
 loading_red_emoji_id: ""
 # Green tick emoji id
 green_tick_emoji_id: ""
+# User timeout (seconds)
+user_timeout: 
 """
 
 class FileManager():
