@@ -14,7 +14,7 @@ class StatusLoop(commands.Cog):
         self.change_status.start()
 
     # Dynamic activity
-    status = cycle(["Shoppy shit backend", "Shoppy spam", "Shoppy exploit"])
+    status = cycle(["shoppy backend crumble", "shoppy backend panic", "shoppy developers sweat", "shoppy backend cry for help", "shoppy backend spin in circles", "shoppy exploits"])
     @tasks.loop(seconds=30)
     async def change_status(self):
         await self.bot.change_presence(status=discord.Status.do_not_disturb, activity=discord.Activity(type=discord.ActivityType.watching, name=next(self.status)))
