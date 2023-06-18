@@ -1,5 +1,6 @@
 import discord, asyncio, sys
 from datetime import datetime
+from typing import Literal
 from discord.ext import commands
 from discord import app_commands
 from src.util.utils import Utils
@@ -23,8 +24,13 @@ class Spam(commands.Cog):
 
     # Spam bot command  
     @app_commands.command(name="spam", description=f"Start spamming some shoppy store with a given product ID. ({Config().user_timeout} seconds timeout)")
-    async def spam_command(self, interaction: discord.Interaction, amount: int, product_id: str):
+    async def spam_command(self, interaction: discord.Interaction, amount: int, product_id: str, payment_method: Literal["Paypal", "Bitcoin", "Litecoin", "Ethereum"]):
         await interaction.response.defer(ephemeral=True)
+
+        if payment_method == "Paypal": payment_method = "PayPal"
+        if payment_method == "Bitcoin": payment_method = "BTC"
+        if payment_method == "Litecoin": payment_method = "LTC"
+        if payment_method == "Ethereum": payment_method = "ETH"
 
         # Clean the username
         username = await self.utils.clean_discord_username(f"{interaction.user.name}#{interaction.user.discriminator}")
@@ -48,7 +54,7 @@ class Spam(commands.Cog):
         await self.logger.discord_log(f"⌛ Requested `{amount}` orders to be spammed at product ID: `{product_id}`. Requested by `{username}`.")
         self.logger.log("INFO", f"⌛ Requested {amount} orders to be spammed at product ID: {product_id}. Requested by {username}")
 
-        self.queue_handler.push_order({'amount': int(amount), 'product_id': str(product_id), 'requested_by': int(interaction.user.id)})
+        self.queue_handler.push_order({'amount': int(amount), 'product_id': str(product_id), 'payment_method': payment_method,'requested_by': int(interaction.user.id)})
         await self.queue_handler.force_check_start()
 
         # Create an embed to send to the user

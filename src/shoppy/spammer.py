@@ -39,12 +39,12 @@ class Spammer:
         except Exception as e:
             self.logger.log("ERROR", f"Error: {e}")
 
-    def send_request(self, product):
+    def send_request(self, product, payment_method):
         while True:
             data = {
                 "email": f"{self.get_random_string(10)}@gmail.com",
                 "fields": [],
-                "gateway": "BTC",
+                "gateway": payment_method,
                 "product": product,
                 "quantity": 1
             }
@@ -53,11 +53,11 @@ class Spammer:
             self.call_api(proxy_dict, data)
             os.system(f"title Shoppy.gg Spammer - Sent: {self.sent_count} - Ratelimited: {self.ratelimited_count} - discord.gg/kws")
 
-    def start(self, amount: int, product_id: str) -> tuple:
+    def start(self, amount: int, product_id: str, payment_method, str) -> tuple:
         try:
             with ThreadPoolExecutor(max_workers=int(amount)) as executor:
                 for _ in range(int(amount)):
-                    executor.submit(lambda: self.send_request(product_id))
+                    executor.submit(lambda: self.send_request(product_id, payment_method))
             return True, f"Successfully sent {self.sent} requests to Shoppy.gg!"
         except Exception as e:
             return False, f"Error: {e}"

@@ -31,13 +31,14 @@ class QueueHandler:
                 order = self.queue.get()
                 amount = order['amount']
                 product_id = order['product_id']
+                payment_method = order['payment_method']
                 requested_by = order['requested_by']
 
                 self.logger.log("INFO", f"Processing order from user {requested_by} for amout of {amount} to product: {product_id}.")
 
                 # Use asyncio's run_in_executor to run blocking functions in a thread
                 with ThreadPoolExecutor() as executor:
-                    await asyncio.get_event_loop().run_in_executor(executor, self.spammer.start, amount, product_id)
+                    await asyncio.get_event_loop().run_in_executor(executor, self.spammer.start, amount, product_id, payment_method)
 
                 # Remove the completed order from the queue
                 self.queue.task_done()
