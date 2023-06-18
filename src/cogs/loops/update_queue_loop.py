@@ -17,7 +17,7 @@ class UpdateQueueLoop(commands.Cog):
         self.update_queue_embed.start()
 
     # Update queue embed message
-    @tasks.loop(seconds=10)
+    @tasks.loop(seconds=45)
     async def update_queue_embed(self):
 
         if not self.config.queue_embed_switch: return
