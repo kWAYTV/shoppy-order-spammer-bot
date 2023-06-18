@@ -28,14 +28,19 @@ class UpdateQueueLoop(commands.Cog):
         data = self.queue_handler.get_queue_data()
         length = self.queue_handler.get_queue_length()
 
+        # Set the embed description
+        if length > 0:
+            description = "`User`/`Amount`/`Product ID`\n"
+            for index, order in enumerate(data):
+                amount = order['amount']
+                product_id = order['product_id']
+                requested_by = order['requested_by']
+                emoji = self.config.loading_green_emoji_id if index == 0 else self.config.loading_red_emoji_id
+                description = description + f" > • {emoji} <@{requested_by}> • `{amount}`/`{product_id}`\n"
+        else:
+            description = "There's no orders in queue."
+
         # Create the embed
-        description = "`User`/`Amount`/`Product ID`\n"
-        for index, order in enumerate(data):
-            amount = order['amount']
-            product_id = order['product_id']
-            requested_by = order['requested_by']
-            emoji = self.config.loading_green_emoji_id if index == 0 else self.config.loading_red_emoji_id
-            description = description + f" > • {emoji} <@{requested_by}> • `{amount}`/`{product_id}`\n"
         embed = discord.Embed(title="📝 Shoppy Queue.", description=description, color=0xb34760)
         embed.set_footer(text=f"Shoppy Order Spammer • Total: {length}")
         embed.set_thumbnail(url=self.config.shoppy_logo)
