@@ -20,6 +20,8 @@ class UpdateQueueLoop(commands.Cog):
     @tasks.loop(seconds=10)
     async def update_queue_embed(self):
 
+        if not self.config.queue_embed_switch: return
+
         # Fetch the message and channel
         queue_channel = self.bot.get_channel(Config().queue_embed_channel_id)
         queue_message = await queue_channel.fetch_message(Config().queue_embed_message_id)

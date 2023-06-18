@@ -4,6 +4,7 @@ green_tick_emoji_id:
 loading_green_emoji_id:
 loading_red_emoji_id:
 logs_channel:
+queue_embed_switch:
 queue_embed_channel_id:
 queue_embed_message_id:
 user_timeout:

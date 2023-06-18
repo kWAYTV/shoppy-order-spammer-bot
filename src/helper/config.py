@@ -9,6 +9,7 @@ class Config():
         with open("config.yaml", "r") as file:
             self.config = yaml.load(file, Loader=SafeLoader)
             self.shoppy_logo = "https://i.imgur.com/Nfocsma.png"
+            self.queue_embed_switch = self.config["queue_embed_switch"]
             self.queue_embed_channel_id = int(self.config["queue_embed_channel_id"])
             self.queue_embed_message_id = int(self.config["queue_embed_message_id"])
             self.discord_token = self.config["discord_token"]

@@ -17,6 +17,9 @@ class QueueEmbed(commands.Cog):
     @app_commands.command(name="queue_embed", description="Creates and sets the queue embed.")
     async def queue_embed_command(self, interaction: discord.Interaction):
         await interaction.response.defer()
+
+        if not self.config.queue_embed_switch:
+            return await interaction.followup.send("❌ Queue embed is disabled in the config! Enable it and restart the bot.", ephemeral=True)
         
         embed = discord.Embed(title="📝 Shoppy Queue.", color=0xb34760)
         embed.set_footer(text="Shoppy Order Spammer")

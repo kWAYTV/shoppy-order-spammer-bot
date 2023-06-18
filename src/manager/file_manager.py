@@ -12,6 +12,7 @@ green_tick_emoji_id:
 loading_green_emoji_id: 
 loading_red_emoji_id: 
 logs_channel: 
+queue_embed_switch: 
 queue_embed_channel_id: 
 queue_embed_message_id: 
 user_timeout: 
@@ -44,3 +45,7 @@ class FileManager():
         if os.stat("proxies.txt").st_size == 0:
             self.logger.log("INFO", "Proxies file is empty, please fill it out with proxies in user:pass@ip:port format and try again.")
             exit()
+
+        # If the folder "/src/database" doesn't exist, create it.
+        if not os.path.exists("src/database"):
+            os.makedirs("src/database")
