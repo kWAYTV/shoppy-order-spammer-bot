@@ -44,9 +44,8 @@ class UpdateQueueLoop(commands.Cog):
 
         # Create the embed
         embed = discord.Embed(title="📝 Shoppy Queue.", description=description, color=0xb34760)
-        embed.set_footer(text=f"Shoppy Order Spammer • Total: {length}")
+        embed.set_footer(text=f"Total: {length} • Last updated: {datetime.utcnow().strftime('%H:%M:%S')}")
         embed.set_thumbnail(url=self.config.shoppy_logo)
-        embed.timestamp = datetime.utcnow()
 
         # Edit the message
         await queue_message.edit(embed=embed)
