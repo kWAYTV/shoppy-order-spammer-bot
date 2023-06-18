@@ -6,16 +6,29 @@ from src.helper.config import Config
 sys.dont_write_bytecode = True
 
 defaultConfig = """
+# Shoppy order spammer
+
+# Discord bot prefix
 bot_prefix: 
+# Discord bot token
 discord_token: 
+# Discord green tick emoji id
 green_tick_emoji_id: 
+# Discord green loading emoji id
 loading_green_emoji_id: 
+# Discord red loading emoji id
 loading_red_emoji_id: 
+# Discord logs channel id
 logs_channel: 
+# Discord queue embed switch (true/false)
 queue_embed_switch: 
+# Discord queue embed channel id
 queue_embed_channel_id: 
+# Discord queue embed message id
 queue_embed_message_id: 
+# Discord user timeout after order (in seconds)
 user_timeout: 
+
 """
 
 class FileManager():
