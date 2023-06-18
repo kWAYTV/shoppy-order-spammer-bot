@@ -37,8 +37,7 @@ Use at your own risk!
 
 ## 📝 To-Do
 
-- Queue System.
-- Free proxy scraper.
+- Free proxy scraper
 
 ## 🤝 Contributing
 
