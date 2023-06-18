@@ -55,13 +55,13 @@ class Spam(commands.Cog):
         self.logger.log("INFO", f"⌛ Requested {amount} orders to be spammed at product ID: {product_id}. Requested by {username}")
 
         # Create an embed to send to the user
-        embed = discord.Embed(title=f"{self.config.green_tick_emoji_id} Successfully added!", description=f"Order added to the queue.\nQueued `{amount}` orders at product ID: `{product_id}`.", color=0x00ff00)
+        embed = discord.Embed(title=f"{self.config.loading_green_emoji_id} Successfully added!", description=f"Order added to the queue.\nQueued `{amount}` orders at product ID: `{product_id}`.", color=0x00ff00)
         embed.set_thumbnail(url=self.config.shoppy_logo)
         embed.set_footer(text=f"Shoppy Order Spammer • Requested by {username}")
         embed.timestamp = datetime.utcnow()
 
         # Edit the message to send the embed and log it to console and logs channel
-        await requested_message.edit(content=f"{self.config.green_tick_emoji_id} The order has been added to the queue.", embed=embed)
+        await requested_message.edit(content=f"{self.config.loading_green_emoji_id} The order has been added to the queue.", embed=embed)
         await self.logger.discord_log(f"✅ Successfully added `{amount}` orders at product ID: `{product_id}` to the queue. Requested by `{username}`.")
         self.logger.log("INFO", f"✅ Successfully added {amount} orders at product ID: {product_id} to the queue. Requested by {username}")
 
