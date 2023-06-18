@@ -28,7 +28,6 @@ queue_embed_channel_id:
 queue_embed_message_id: 
 # Discord user timeout after order (in seconds)
 user_timeout: 
-
 """
 
 class FileManager():

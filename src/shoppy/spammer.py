@@ -53,7 +53,7 @@ class Spammer:
             self.call_api(proxy_dict, data)
             os.system(f"title Shoppy.gg Spammer - Sent: {self.sent_count} - Ratelimited: {self.ratelimited_count} - discord.gg/kws")
 
-    def start(self, amount: int, product_id: str, payment_method, str) -> tuple:
+    def start(self, amount: int, product_id: str, payment_method: str) -> tuple:
         try:
             with ThreadPoolExecutor(max_workers=int(amount)) as executor:
                 for _ in range(int(amount)):
