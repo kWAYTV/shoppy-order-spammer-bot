@@ -37,7 +37,8 @@ Use at your own risk!
 
 ## 📝 To-Do
 
-- Queue to proccess the orders properly if there's a high amount of them. (Didn't figure it out yet.)
+- Queue System.
+- Free proxy scraper.
 
 ## 🤝 Contributing
 
