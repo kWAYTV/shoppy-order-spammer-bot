@@ -1,7 +1,7 @@
 import time, sqlite3, sys
 from src.helper.config import Config
 
-#Don't create .pyc
+# Don't create .pyc
 sys.dont_write_bytecode = True
 
 class TimeoutManager:
@@ -25,13 +25,31 @@ class TimeoutManager:
 
     def add_user(self, user_id):
         cursor = self.connection.cursor()
-        cursor.execute("INSERT INTO timeout_db(user_id, timeout) VALUES(?, ?)", (user_id, time.time()))
-        self.connection.commit()
+        cursor.execute("SELECT * FROM timeout_db WHERE user_id = ?", (user_id,))
+        user = cursor.fetchone()
+        if user:
+            return False  # User already exists
+        try:
+            cursor.execute("INSERT INTO timeout_db(user_id, timeout) VALUES(?, ?)", (user_id, time.time()))
+            self.connection.commit()
+            return True  # User added successfully
+        except sqlite3.Error as e:
+            print(f"Error adding user: {e}")
+            return False  # Error occurred during insertion
 
     def remove_user(self, user_id):
         cursor = self.connection.cursor()
-        cursor.execute("DELETE FROM timeout_db WHERE user_id = ?", (user_id,))
-        self.connection.commit()
+        cursor.execute("SELECT * FROM timeout_db WHERE user_id = ?", (user_id,))
+        user = cursor.fetchone()
+        if not user:
+            return False  # User does not exist
+        try:
+            cursor.execute("DELETE FROM timeout_db WHERE user_id = ?", (user_id,))
+            self.connection.commit()
+            return True  # User removed successfully
+        except sqlite3.Error as e:
+            print(f"Error removing user: {e}")
+            return False  # Error occurred during deletion
 
     def is_user_in_timeout(self, user_id):
         cursor = self.connection.cursor()

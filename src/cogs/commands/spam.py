@@ -1,4 +1,5 @@
 import discord, asyncio, sys
+from datetime import datetime
 from discord.ext import commands
 from discord import app_commands
 from src.util.utils import Utils
@@ -21,8 +22,7 @@ class Spam(commands.Cog):
         self.timeout_manager = TimeoutManager()
 
     # Spam bot command  
-    @app_commands.command(name="spam", description="Start spamming some shoppy store.")
-    @app_commands.checks.has_permissions(administrator=True)
+    @app_commands.command(name="spam", description=f"Start spamming some shoppy store with a given product ID. ({Config().user_timeout} seconds timeout)")
     async def spam_command(self, interaction: discord.Interaction, amount: int, product_id: str):
         await interaction.response.defer(ephemeral=True)
 
@@ -53,7 +53,10 @@ class Spam(commands.Cog):
             await asyncio.get_event_loop().run_in_executor(executor, self.spammer.start, amount, product_id)
 
         # Create an embed to send to the user
-        embed = discord.Embed(title="Spamming finished!", description=f"Successfully sent `{amount}` orders at product ID: `{product_id}`.", color=0x00ff00).set_thumbnail(url=self.config.shoppy_logo).set_footer(text=f"Shoppy Order Spammer • Requested by {username}")
+        embed = discord.Embed(title="Spamming finished!", description=f"Successfully sent `{amount}` orders at product ID: `{product_id}`.", color=0x00ff00)
+        embed.set_thumbnail(url=self.config.shoppy_logo)
+        embed.set_footer(text=f"Shoppy Order Spammer • Requested by {username}")
+        embed.timestamp = datetime.utcnow()
 
         # Edit the message to send the embed and log it to console and logs channel
         await requested_message.edit(content=f"{self.config.green_tick_emoji_id} Your order has been completed! `{amount}` orders have been sent to product ID: `{product_id}`.", embed=embed)
@@ -61,7 +64,15 @@ class Spam(commands.Cog):
         self.logger.log("INFO", f"✅ Successfully sent {amount} orders at product ID: {product_id}. Requested by {username}")
 
         # Add user to timeout list after they have successfully used the command
-        self.timeout_manager.add_user(interaction.user.id)
+        adding = self.timeout_manager.add_user(interaction.user.id)
+
+        # Check if the user is already in the timeout list
+        if not adding:
+            await self.logger.discord_log(f"❌ The user {username} `already` in the timeout list.")
+            self.logger.log("INFO", f"❌ The user {username} already in the timeout list.")
+            return await interaction.followup.send(f"{self.config.loading_red_emoji_id} The user {username} `already` in the timeout list.", ephemeral=True)
+        
+        # Log that the user has been added to the timeout list
         await self.logger.discord_log(f"⏳ {username} has been added to the timeout list for {self.config.user_timeout} seconds.")
         self.logger.log("INFO", f"⏳ {username} has been added to the timeout list for {self.config.user_timeout} seconds.")
 
