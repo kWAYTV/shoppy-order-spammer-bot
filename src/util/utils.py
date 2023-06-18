@@ -1,3 +1,8 @@
+import sys
+
+#Don't create .pyc
+sys.dont_write_bytecode = True
+
 class Utils:
 
     def __init__(self):

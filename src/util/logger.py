@@ -1,9 +1,12 @@
-import discord
+import discord, sys
 from os import system, name
 from datetime import datetime
 from discord.ext import commands
 from colorama import Fore, Style
 from src.helper.config import Config
+
+#Don't create .pyc
+sys.dont_write_bytecode = True
 
 class Logger:
 

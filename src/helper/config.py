@@ -1,5 +1,8 @@
-import yaml
+import yaml, sys
 from yaml import SafeLoader
+
+#Don't create .pyc
+sys.dont_write_bytecode = True
 
 class Config():
     def __init__(self):

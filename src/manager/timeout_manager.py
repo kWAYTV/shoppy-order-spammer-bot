@@ -1,5 +1,8 @@
-import time, sqlite3
+import time, sqlite3, sys
 from src.helper.config import Config
+
+#Don't create .pyc
+sys.dont_write_bytecode = True
 
 class TimeoutManager:
     def __init__(self):

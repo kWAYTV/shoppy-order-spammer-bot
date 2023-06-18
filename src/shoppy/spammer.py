@@ -1,9 +1,11 @@
-import discord, requests, math, time, os, random, string, threading
-from datetime import datetime
+import discord, requests, os, random, string, sys
 from json import JSONDecodeError
 from src.util.logger import Logger
 from src.helper.config import Config
 from concurrent.futures import ThreadPoolExecutor
+
+#Don't create .pyc
+sys.dont_write_bytecode = True
 
 class Spammer:
     def __init__(self) -> None:

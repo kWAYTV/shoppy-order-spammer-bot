@@ -1,9 +1,10 @@
-import logging
-from colorama import Fore
+import logging, sys
 from discord.ext import commands
 from src.util.logger import Logger
-from src.helper.config import Config
 from pystyle import Colors, Colorate, Center
+
+#Don't create .pyc
+sys.dont_write_bytecode = True
 
 logo = """
 ███████╗██╗  ██╗ ██████╗ ██████╗ ██████╗ ██╗   ██╗    ███████╗██████╗  █████╗ ███╗   ███╗

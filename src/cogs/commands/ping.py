@@ -1,10 +1,12 @@
-import discord
-from colorama import Fore
+import discord, sys
 from datetime import datetime
 from discord.ext import commands
 from discord import app_commands
 from src.util.logger import Logger
 from src.helper.config import Config
+
+#Don't create .pyc
+sys.dont_write_bytecode = True
 
 class Ping(commands.Cog):
     def __init__(self, bot: commands.Bot):

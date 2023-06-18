@@ -1,6 +1,9 @@
+import sys
 from discord.ext import commands
 from src.util.logger import Logger
-from src.helper.config import Config
+
+#Don't create .pyc
+sys.dont_write_bytecode = True
 
 class GuildRemove(commands.Cog):
 

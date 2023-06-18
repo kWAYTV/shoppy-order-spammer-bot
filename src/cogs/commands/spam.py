@@ -1,12 +1,15 @@
-import discord, asyncio
+import discord, asyncio, sys
 from discord.ext import commands
 from discord import app_commands
-from src.util.logger import Logger
 from src.util.utils import Utils
+from src.util.logger import Logger
 from src.helper.config import Config
 from src.shoppy.spammer import Spammer
 from concurrent.futures import ThreadPoolExecutor
-from src.helper.timeout_manager import TimeoutManager
+from src.manager.timeout_manager import TimeoutManager
+
+#Don't create .pyc
+sys.dont_write_bytecode = True
 
 class Spam(commands.Cog):
     def __init__(self, bot: commands.Bot):

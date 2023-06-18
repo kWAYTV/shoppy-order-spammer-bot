@@ -1,5 +1,9 @@
+import sys
 from discord.ext import commands
 from src.util.logger import Logger
+
+#Don't create .pyc
+sys.dont_write_bytecode = True
 
 class GuildJoin(commands.Cog):
 

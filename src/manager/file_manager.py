@@ -1,6 +1,9 @@
-import os
+import os, sys
 from src.util.logger import Logger
 from src.helper.config import Config
+
+#Don't create .pyc
+sys.dont_write_bytecode = True
 
 defaultConfig = """
 # Shoppy.gg Order Spammer Bot Config #

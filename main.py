@@ -1,11 +1,14 @@
 # Imports
-import discord, os
-from discord.ext import commands
+import discord, os, sys
 from colorama import Fore
-from src.helper.config import Config
+from discord.ext import commands
 from src.util.logger import Logger
-from src.helper.file_manager import FileManager
-from src.helper.timeout_manager import TimeoutManager
+from src.helper.config import Config
+from src.manager.file_manager import FileManager
+from src.manager.timeout_manager import TimeoutManager
+
+#Don't create .pyc
+sys.dont_write_bytecode = True
 
 # Define the bot & load the commands, events and loops
 class Bot(commands.Bot):
