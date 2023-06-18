@@ -44,7 +44,6 @@ class Bot(commands.Bot):
         self.logger.clear()
 
         self.logger.log("INFO", f"Setup completed!")
-        self.logger.clear()
 
 # Define the clients
 bot = Bot()
