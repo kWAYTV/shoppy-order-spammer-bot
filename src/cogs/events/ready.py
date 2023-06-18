@@ -29,7 +29,6 @@ class OnReady(commands.Cog):
     async def on_ready(self):
         self.print_logo()
         self.logger.log("INFO", f"Logged in as {self.bot.user.name}#{self.bot.user.discriminator}.")
-        await self.logger.discord_log(f"Bot logged in as {self.bot.user.name}#{self.bot.user.discriminator}.")
 
         logging.basicConfig(handlers=[logging.FileHandler('shoppy_spammer_bot.log', 'a+', 'utf-8')], level=logging.ERROR, format='%(asctime)s: %(message)s')
 

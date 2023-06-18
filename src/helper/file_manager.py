@@ -6,11 +6,17 @@ defaultConfig = """
 # Shoppy.gg Order Spammer Bot Config #
 
 # Discord bot token
-discord_token: "YOUR TOKEN HERE"
+discord_token: ""
 # Discord bot prefix
 bot_prefix: "."
 # Discord logs channel id
 logs_channel: 0123456789
+# Loading green emoji id
+loading_green_emoji_id: ""
+# Loading red emoji id
+loading_red_emoji_id: ""
+# Green tick emoji id
+green_tick_emoji_id: ""
 """
 
 class FileManager():

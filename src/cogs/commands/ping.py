@@ -18,7 +18,7 @@ class Ping(commands.Cog):
         latency = round(self.bot.latency *  1000)
         embed = discord.Embed(title="🏓 Pong!", description=f"Hey! My latency is `{latency}` ms!", color=0xb34760)
         embed.set_footer(text="Shoppy Order Spammer - discord.gg/kws")
-        embed.set_image(url=self.config.hypixel_logo)
+        embed.set_image(url=self.config.shoppy_logo)
         embed.timestamp = datetime.utcnow()
         await interaction.followup.send(embed=embed)
 

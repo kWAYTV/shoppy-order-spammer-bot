@@ -5,12 +5,14 @@ from colorama import Fore
 from src.helper.config import Config
 from src.util.logger import Logger
 from src.helper.file_manager import FileManager
+from src.helper.timeout_manager import TimeoutManager
 
 # Define the bot & load the commands, events and loops
 class Bot(commands.Bot):
     def __init__(self) -> None:
         self.logger = Logger()
         self.file_manager = FileManager()
+        self.timeout_manager = TimeoutManager()
         super().__init__(command_prefix=Config().bot_prefix, help_command=None, intents=discord.Intents.all())
 
     async def setup_hook(self) -> None:

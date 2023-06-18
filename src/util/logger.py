@@ -31,7 +31,7 @@ class Logger:
     async def discord_log(self, description: str):
         channel = self.bot.get_channel(self.config.logs_channel)
         embed = discord.Embed(title="Shoppy Order Spammer", description=description)
-        embed.set_thumbnail(url=self.config.hypixel_logo)
+        embed.set_thumbnail(url=self.config.shoppy_logo)
         embed.set_footer(text=f"Shoppy Order Spammer - discord.gg/kws")
         embed.timestamp = datetime.utcnow()
         await channel.send(embed=embed)
