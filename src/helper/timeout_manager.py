@@ -4,7 +4,7 @@ from src.helper.config import Config
 class TimeoutManager:
     def __init__(self):
         self.config = Config()
-        self.connection = sqlite3.connect('timeout_db.sqlite')
+        self.connection = sqlite3.connect('src/database/timeout_db.sqlite')
         self.create_table()
 
     def __del__(self):

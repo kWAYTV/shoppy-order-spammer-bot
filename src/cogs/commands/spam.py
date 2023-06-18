@@ -8,7 +8,6 @@ from src.shoppy.spammer import Spammer
 from concurrent.futures import ThreadPoolExecutor
 from src.helper.timeout_manager import TimeoutManager
 
-
 class Spam(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
@@ -33,7 +32,7 @@ class Spam(commands.Cog):
             minutes, seconds = divmod(time_remaining, 60)
             await self.logger.discord_log(f"⏳ @{username} tried to use the spam command but is in timeout for {int(minutes)} minutes and {int(seconds)} seconds.")
             self.logger.log("INFO", f"⏳ @{username} tried to use the spam command but is in timeout for {int(minutes)} minutes and {int(seconds)} seconds.")
-            return await interaction.followup.send(f"{self.config.loading_red_emoji_id} You can only use this command every {self.config.user_timeout} minutes! Please wait {int(minutes)} minutes and {int(seconds)} seconds.", ephemeral=True)
+            return await interaction.followup.send(f"{self.config.loading_red_emoji_id} You can only use this command every {self.config.user_timeout} seconds! Please wait {int(minutes)} minutes and {int(seconds)} seconds.", ephemeral=True)
 
         # Check if the amount is more than 50
         if amount > 50:
