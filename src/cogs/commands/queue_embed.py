@@ -4,6 +4,7 @@ from discord.ext import commands
 from discord import app_commands
 from src.util.logger import Logger
 from src.helper.config import Config
+from src.cogs.loops.update_queue_loop import UpdateQueueLoop
 
 # Try not to create .pyc trash files.
 sys.dont_write_bytecode = True
@@ -12,6 +13,7 @@ class QueueEmbed(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
         self.config = Config()
+        self.update_queue_loop = UpdateQueueLoop(bot)
 
     # QueueEmbed bot command
     @app_commands.command(name="queue_embed", description="Creates and sets the queue embed.")
@@ -31,7 +33,8 @@ class QueueEmbed(commands.Cog):
         self.config.set_queue_embed_channel_id(queue_embed_message.channel.id)
         self.config.set_queue_embed_message_id(queue_embed_message.id)
 
-        await interaction.followup.send("✅ Queue embed created and values set in the config!", ephemeral=True)
+        await interaction.followup.send("✅ Queue embed created and values set in the config! Updating it soon...", ephemeral=True)
+        await self.update_queue_loop.force_update_queue_embed()
 
     @queue_embed_command.error
     async def queue_embed_command_error(self, interaction: discord.Interaction, error: app_commands.AppCommandError):

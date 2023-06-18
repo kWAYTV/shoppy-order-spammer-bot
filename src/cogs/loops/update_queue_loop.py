@@ -23,8 +23,12 @@ class UpdateQueueLoop(commands.Cog):
         if not self.config.queue_embed_switch: return
 
         # Fetch the message and channel
-        queue_channel = self.bot.get_channel(Config().queue_embed_channel_id)
-        queue_message = await queue_channel.fetch_message(Config().queue_embed_message_id)
+        try:
+            queue_channel = self.bot.get_channel(Config().queue_embed_channel_id)
+            queue_message = await queue_channel.fetch_message(Config().queue_embed_message_id)
+        except Exception as e:
+            self.logger.log("ERROR", f"Failed to fetch queue embed message, use the /queue_embed command and wait for the queue to update. Error: {e}")
+            return
 
         # Get the queue data and length
         data = self.queue_handler.get_queue_data()
@@ -49,6 +53,10 @@ class UpdateQueueLoop(commands.Cog):
 
         # Edit the message
         await queue_message.edit(embed=embed)
+
+    # Force update queue embed message
+    async def force_update_queue_embed(self) -> None:
+        await self.update_queue_embed()
 
     @update_queue_embed.before_loop
     async def before_update_queue_embed(self) -> None:
