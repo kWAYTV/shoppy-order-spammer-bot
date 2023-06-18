@@ -60,8 +60,8 @@ class Spam(commands.Cog):
 
         # Add user to timeout list after they have successfully used the command
         self.timeout_manager.add_user(interaction.user.id)
-        await self.logger.discord_log(f"⏳ @{username} has been added to the timeout list for {self.config.user_timeout} minutes.")
-        self.logger.log("INFO", f"⏳ @{username} has been added to the timeout list for {self.config.user_timeout} minutes.")
+        await self.logger.discord_log(f"⏳ @{username} has been added to the timeout list for {self.config.user_timeout} seconds.")
+        self.logger.log("INFO", f"⏳ @{username} has been added to the timeout list for {self.config.user_timeout} seconds.")
 
     @spam_command.error
     async def spam_command_error(self, interaction: discord.Interaction, error: app_commands.AppCommandError):
