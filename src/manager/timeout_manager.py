@@ -7,7 +7,7 @@ sys.dont_write_bytecode = True
 class TimeoutManager:
     def __init__(self):
         self.config = Config()
-        self.connection = sqlite3.connect('src/database/timeout_db.sqlite')
+        self.connection = sqlite3.connect('src/database/timeout.sqlite')
         self.create_table()
 
     def __del__(self):

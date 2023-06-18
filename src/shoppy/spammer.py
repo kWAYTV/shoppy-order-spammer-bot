@@ -4,7 +4,7 @@ from src.util.logger import Logger
 from src.helper.config import Config
 from concurrent.futures import ThreadPoolExecutor
 
-#Don't create .pyc
+# Try to not create .pyc trash files.
 sys.dont_write_bytecode = True
 
 class Spammer:

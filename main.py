@@ -7,7 +7,7 @@ from src.helper.config import Config
 from src.manager.file_manager import FileManager
 from src.manager.timeout_manager import TimeoutManager
 
-#Don't create .pyc
+# Try to not create .pyc trash files.
 sys.dont_write_bytecode = True
 
 # Define the bot & load the commands, events and loops

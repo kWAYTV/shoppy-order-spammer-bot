@@ -2,7 +2,7 @@ import sys
 from discord.ext import commands
 from src.util.logger import Logger
 
-#Don't create .pyc
+# Try to not create .pyc trash files.
 sys.dont_write_bytecode = True
 
 class GuildRemove(commands.Cog):

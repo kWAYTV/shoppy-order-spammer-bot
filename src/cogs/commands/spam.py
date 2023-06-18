@@ -5,11 +5,11 @@ from discord import app_commands
 from src.util.utils import Utils
 from src.util.logger import Logger
 from src.helper.config import Config
-from src.shoppy.spammer import Spammer
 from concurrent.futures import ThreadPoolExecutor
+from src.handler.queue_handler import QueueHandler
 from src.manager.timeout_manager import TimeoutManager
 
-#Don't create .pyc
+# Try to not create .pyc trash files.
 sys.dont_write_bytecode = True
 
 class Spam(commands.Cog):
@@ -18,8 +18,8 @@ class Spam(commands.Cog):
         self.config = Config()
         self.utils = Utils()
         self.logger = Logger(self.bot)
-        self.spammer = Spammer()
         self.timeout_manager = TimeoutManager()
+        self.queue_handler = QueueHandler()
 
     # Spam bot command  
     @app_commands.command(name="spam", description=f"Start spamming some shoppy store with a given product ID. ({Config().user_timeout} seconds timeout)")
@@ -48,18 +48,17 @@ class Spam(commands.Cog):
         await self.logger.discord_log(f"⌛ Requested `{amount}` orders to be spammed at product ID: `{product_id}`. Requested by `{username}`.")
         self.logger.log("INFO", f"⌛ Requested {amount} orders to be spammed at product ID: {product_id}. Requested by {username}")
 
-        # Use asyncio's run_in_executor to run blocking functions in a thread
-        with ThreadPoolExecutor() as executor:
-            await asyncio.get_event_loop().run_in_executor(executor, self.spammer.start, amount, product_id)
+        self.queue_handler.push_order({'amount': int(amount), 'product_id': str(product_id), 'requested_by': int(interaction.user.id)})
+        await self.queue_handler.force_check_start()
 
         # Create an embed to send to the user
-        embed = discord.Embed(title="Spamming finished!", description=f"Successfully sent `{amount}` orders at product ID: `{product_id}`.", color=0x00ff00)
+        embed = discord.Embed(title=f"{self.config.green_tick_emoji_id} Successfully added!", description=f"Order added to the queue.\nQueued `{amount}` orders at product ID: `{product_id}`.", color=0x00ff00)
         embed.set_thumbnail(url=self.config.shoppy_logo)
         embed.set_footer(text=f"Shoppy Order Spammer • Requested by {username}")
         embed.timestamp = datetime.utcnow()
 
         # Edit the message to send the embed and log it to console and logs channel
-        await requested_message.edit(content=f"{self.config.green_tick_emoji_id} Your order has been completed! `{amount}` orders have been sent to product ID: `{product_id}`.", embed=embed)
+        await requested_message.edit(content=f"{self.config.green_tick_emoji_id} The order has been added to the queue.", embed=embed)
         await self.logger.discord_log(f"✅ Successfully sent `{amount}` orders at product ID: `{product_id}`. Requested by `{username}`.")
         self.logger.log("INFO", f"✅ Successfully sent {amount} orders at product ID: {product_id}. Requested by {username}")
 

@@ -5,7 +5,7 @@ from discord import app_commands
 from src.util.logger import Logger
 from src.helper.config import Config
 
-#Don't create .pyc
+# Try to not create .pyc trash files.
 sys.dont_write_bytecode = True
 
 class Ping(commands.Cog):

@@ -7,7 +7,7 @@ from src.util.logger import Logger
 from src.helper.config import Config
 from src.manager.timeout_manager import TimeoutManager
 
-#Don't create .pyc
+# Try to not create .pyc trash files.
 sys.dont_write_bytecode = True
 
 class Revoke(commands.Cog):
@@ -21,7 +21,7 @@ class Revoke(commands.Cog):
     # Revoke bot command  
     @app_commands.command(name="revoke", description="Revoke someone's timeout")
     @app_commands.checks.has_permissions(administrator=True)
-    async def revoke_command(self, interaction: discord.Interaction, user: discord.Member):
+    async def revoke_command(self, interaction: discord.Interaction, user: discord.Member, notify_user: bool = True):
         await interaction.response.defer(ephemeral=True)
 
         # Clean the username
@@ -43,6 +43,13 @@ class Revoke(commands.Cog):
         embed = discord.Embed(title=f"{self.config.green_tick_emoji_id} Timeout revoked", description=f"User ID: `{user.id}` has been revoked by {interaction.user.mention}.", color=0x00ff00)
         embed.set_footer(text=f"Shoppy Order Spammer • Revoked by {request_username}")
         embed.timestamp = datetime.utcnow()
+
+        # Dm the user that their timeout has been revoked
+        if notify_user:
+            try:
+                await user.send(embed=embed)
+            except:
+                pass
 
         await requested_message.edit(content=f"{self.config.green_tick_emoji_id} The timeout has been revoked.", embed=embed)
         await self.logger.discord_log(f"✅ {request_username} revoked user ID: `{user.id}`'s timeout.")

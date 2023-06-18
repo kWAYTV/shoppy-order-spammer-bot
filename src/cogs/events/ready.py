@@ -3,7 +3,7 @@ from discord.ext import commands
 from src.util.logger import Logger
 from pystyle import Colors, Colorate, Center
 
-#Don't create .pyc
+# Try to not create .pyc trash files.
 sys.dont_write_bytecode = True
 
 logo = """

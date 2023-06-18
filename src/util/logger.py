@@ -5,7 +5,7 @@ from discord.ext import commands
 from colorama import Fore, Style
 from src.helper.config import Config
 
-#Don't create .pyc
+# Try to not create .pyc trash files.
 sys.dont_write_bytecode = True
 
 class Logger:

@@ -3,7 +3,7 @@ from itertools import cycle
 from src.util.logger import Logger
 from discord.ext import commands, tasks
 
-#Don't create .pyc
+# Try to not create .pyc trash files.
 sys.dont_write_bytecode = True
 
 class StatusLoop(commands.Cog):

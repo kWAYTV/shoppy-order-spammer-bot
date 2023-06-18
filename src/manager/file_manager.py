@@ -2,25 +2,18 @@ import os, sys
 from src.util.logger import Logger
 from src.helper.config import Config
 
-#Don't create .pyc
+# Try to not create .pyc trash files.
 sys.dont_write_bytecode = True
 
 defaultConfig = """
-# Shoppy.gg Order Spammer Bot Config #
-
-# Discord bot token
-discord_token: ""
-# Discord bot prefix
-bot_prefix: "."
-# Discord logs channel id
-logs_channel: 0123456789
-# Loading green emoji id
-loading_green_emoji_id: ""
-# Loading red emoji id
-loading_red_emoji_id: ""
-# Green tick emoji id
-green_tick_emoji_id: ""
-# User timeout (seconds)
+bot_prefix: 
+discord_token: 
+green_tick_emoji_id: 
+loading_green_emoji_id: 
+loading_red_emoji_id: 
+logs_channel: 
+queue_embed_channel_id: 
+queue_embed_message_id: 
 user_timeout: 
 """
 

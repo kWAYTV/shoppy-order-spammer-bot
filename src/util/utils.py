@@ -1,6 +1,6 @@
 import sys
 
-#Don't create .pyc
+# Try to not create .pyc trash files.
 sys.dont_write_bytecode = True
 
 class Utils:
