@@ -26,6 +26,7 @@ class QueueHandler:
     # Processes the queue
     async def process_queue(self):
         try:
+
             while not self.queue.empty():
                 self.proccessing = True
                 order = self.queue.get()
@@ -42,6 +43,9 @@ class QueueHandler:
 
                 # Remove the completed order from the queue
                 self.queue.task_done()
+
+            self.proccessing = False
+            
         except Exception as e:
             self.proccessing = False
             self.logger.log("ERROR", f"Error processing queue: {e}")
